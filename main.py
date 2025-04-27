@@ -120,7 +120,10 @@ def authenticate_user(db: Session, username: str, password: str) -> Union[User, 
         return False
     return user
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:
+async def get_current_user(
+        token: str = Depends(oauth2_scheme),
+        db: Session = Depends(get_db)
+) -> User:
     """
        Получает текущего пользователя на основе JWT-токена.
 
@@ -177,12 +180,15 @@ def register(user: UserCreate, db: Session = Depends(get_db)) -> User:
     return db_user
 
 @app.post("/token", response_model=Token)
-def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)) -> dict:
+def login_for_access_token(
+        form_data: OAuth2PasswordRequestForm = Depends(),
+        db: Session = Depends(get_db)
+) -> dict:
     """
         Аутентифицирует пользователя и выдает токен доступа.
 
         Args:
-            form_data (OAuth2PasswordRequestForm): Данные формы для аутентификации (username и password).
+            form_data (OAuth2PasswordRequestForm): Данные формы для аутентификации (user и pass).
             db (Session): Сессия базы данных.
 
         Raises:
@@ -199,7 +205,8 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
+    access_token = create_access_token(data={"sub": user.username},
+                                       expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.post("/books", response_model=BookResponse)
