@@ -67,17 +67,18 @@ Swagger UI доступен по адресу: http://localhost:8000/docs.
 ## Структура базы данных
 
 База данных состоит из трех таблиц:
+
 **users**
-Содержит информацию о пользователях.
-Поля: id, username, password_hash.
+  Содержит информацию о пользователях.
+  Поля: id, username, password_hash.
 
 **books**
-Хранит данные о книгах в каталоге.
-Поля: id, title, author, borrow_count.
+  Хранит данные о книгах в каталоге.
+  Поля: id, title, author, borrow_count.
 
 **borrowed_books**
-Отслеживает записи о заимствованиях книг.
-Поля: id, user_id, book_id, borrowed_at, returned_at.
+  Отслеживает записи о заимствованиях книг.
+  Поля: id, user_id, book_id, borrowed_at, returned_at.
 
 ## API-эндпоинты
 ### Регистрация и аутентификация
@@ -123,3 +124,5 @@ pylint main.py > pylint.txt
 
 ## Демонстрация работы
 Демо-видео с презентацией проекта доступно по ссылке:
+
+[Демонстрация проекта](https://disk.yandex.ru/i/8szCm0jQPSxvGA)
